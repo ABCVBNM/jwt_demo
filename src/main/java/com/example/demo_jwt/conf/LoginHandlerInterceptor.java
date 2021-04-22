@@ -27,7 +27,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("L_Token");
-        if (!tokenUtilService.verifyToken(token)) {
+        if (token == null || !tokenUtilService.verifyToken(token)) {
             response.setStatus(401);
             response.getWriter().print("无效的Token，请重新登录！");
             response.getWriter().flush();
